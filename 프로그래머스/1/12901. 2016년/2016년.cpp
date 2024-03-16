@@ -13,6 +13,5 @@ string solution(int a, int b) {
         days+=m_days[i];
     }
     days = days - m_days[a-1] + b;
-    answer += dow[days%7];
-    return answer;
+    return dow[days%7];
 }
