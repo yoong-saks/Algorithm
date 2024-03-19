@@ -31,8 +31,8 @@ vector<int> solution(int N, vector<int> stages) {
         }
     }
     
-    for(int i = 1; i < fail_rate.size(); ++i) {
+    for(int i = 1; i < fail_rate.size(); ++i) 
         if (fail_rate[i] == 0) answer.push_back(i);
-    }
+    
     return answer;
 }
