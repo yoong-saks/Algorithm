@@ -17,7 +17,7 @@ int solution(int n) {
     }
     
     for(int i = 2; i <= n; ++i) {
-        if(arr[i] ) answer++;
+        if(arr[i]) answer++;
     }
     return answer;
 }
