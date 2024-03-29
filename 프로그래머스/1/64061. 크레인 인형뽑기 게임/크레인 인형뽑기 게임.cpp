@@ -14,9 +14,7 @@ int solution(vector<vector<int>> board, vector<int> moves) {
                     stack.pop_back();
                     answer+=2;
                 } 
-                else {
-                    stack.push_back(board[j][moves[i]-1]);
-                }
+                else stack.push_back(board[j][moves[i]-1]);
                 board[j][moves[i]-1] = 0;
                 break;
             }
