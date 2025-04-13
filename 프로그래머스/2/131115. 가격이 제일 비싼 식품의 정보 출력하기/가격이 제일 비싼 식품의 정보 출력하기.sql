@@ -1,4 +1,4 @@
--- 코드를 입력하세요
-SELECT *
-FROM FOOD_PRODUCT
-WHERE PRICE = (SELECT MAX(PRICE) FROM FOOD_PRODUCT);
+select product_id, product_name, product_cd, category, price
+from food_product
+order by price desc
+limit 1;
