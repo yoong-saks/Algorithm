@@ -1,4 +1,2 @@
--- 코드를 입력하세요
-SELECT ANIMAL_ID, NAME, IF(SEX_UPON_INTAKE like 'Neutered%' or SEX_UPON_INTAKE like 'Spayed%', 'O','X') as '중성화'
-FROM ANIMAL_INS
-ORDER BY ANIMAL_ID;
+select animal_id, name, if(sex_upon_intake like '%ed%', 'O', 'X') as '중성화'
+from animal_ins
