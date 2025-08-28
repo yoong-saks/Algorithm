@@ -11,7 +11,7 @@ int main() {
     while(1) {
         cin >> a >> b;
 
-        if(!a && !b == 1) {
+        if(!a && !b) {
             break;
         }
         cout << a + b << '\n';
