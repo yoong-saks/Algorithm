@@ -4,20 +4,14 @@
 using namespace std;
 
 int main() {
-    int a, b, c;
+    int a[3];
 
-    cin >> a >> b >> c;
+    for (int i = 0; i < 3; i++) cin >> a[i];
 
-    if (a == b && b == c) {
-        cout << 10000 + a * 1000 << endl;
-    } else if (a == b || b == c || a == c) {
-        if (a == b || b == c) {
-            cout << 1000 + b * 100 << endl;
-        } else {
-            cout << 1000 + a * 100 << endl;
-        }
-    } else {
-        cout << max({a, b, c}) * 100 << endl; 
-    }
+    sort(a, a + 3);
+
+    if(a[0] == a[2]) cout << 10000 + a[0] * 1000 << endl;
+    else if(a[0] == a[1] || a[1] == a[2]) cout << 1000 + a[1] * 100 << endl;
+    else cout << 100 * a[2] << endl;
 
 }
