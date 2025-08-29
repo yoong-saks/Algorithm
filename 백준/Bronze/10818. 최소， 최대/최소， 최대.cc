@@ -5,7 +5,9 @@
 using namespace std;
 
 int main() {
-    vector<int> v;
+    int min = 1000000;
+    int max = -1000000;
+
     int a;
 
     cin.tie(NULL);
@@ -13,14 +15,17 @@ int main() {
 
     cin >> a;
 
-    for(int i = 0; i < a; i++) {
+    while(a--) {
         int t;
         cin >> t;
-        
-        v.push_back(t);
+
+        if(t < min) {
+            min = t;
+        }
+        if(t > max) {
+            max = t;
+        }
     }
 
-    sort(v.begin(), v.end());
-
-    cout << v.front() << " " << v.back() << '\n';
+    cout << min << " " << max << '\n';
 }
