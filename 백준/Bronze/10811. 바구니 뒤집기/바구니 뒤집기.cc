@@ -24,8 +24,8 @@ int main() {
         reverse(v.begin() + x - 1, v.begin() + y);
     }
 
-    for(int i = 0; i < v.size(); i++) {
-        cout << v[i] << ' ';
+    for(int i : v) {
+        cout << i << ' ';
     }
     cout << '\n';
 }
