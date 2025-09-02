@@ -9,7 +9,6 @@ int main() {
 
     vector<int> v(26);
     string s;
-    int sum = 0;
 
     fill(v.begin(), v.end(), -1);
 
