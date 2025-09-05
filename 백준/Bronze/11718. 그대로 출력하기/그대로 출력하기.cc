@@ -8,12 +8,8 @@ int main() {
     string s1;
     int i = 0;
 
-    while(i < 100) {
+    while(!cin.eof()) {
         getline(cin, s1);
         cout << s1 << '\n';
-
-        if(cin.eof()) {
-            break;
-        }
     }
 }
