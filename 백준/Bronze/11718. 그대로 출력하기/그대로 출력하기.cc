@@ -6,7 +6,6 @@ int main() {
     ios_base::sync_with_stdio(false);
 
     string s1;
-    int i = 0;
 
     while(!cin.eof()) {
         getline(cin, s1);
