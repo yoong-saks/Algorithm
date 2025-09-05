@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+
+    string s1;
+    int i = 0;
+
+    while(i < 100) {
+        getline(cin, s1);
+        cout << s1 << '\n';
+
+        if(cin.eof()) {
+            break;
+        }
+    }
+}
