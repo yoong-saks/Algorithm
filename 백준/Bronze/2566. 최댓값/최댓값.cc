@@ -7,7 +7,6 @@ int main() {
     cin.tie(NULL);
     ios_base::sync_with_stdio(false);
     
-    vector<vector<int>> v(9,vector<int>(9));
     int max = -1;
     int a;
     int xidx, yidx;
