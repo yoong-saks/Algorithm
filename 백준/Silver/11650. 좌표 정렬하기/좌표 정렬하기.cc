@@ -22,14 +22,7 @@ int main() {
         v.push_back(p);
     }
 
-    sort(v.begin(), v.end(), 
-        [](pair<int, int> a, pair<int, int> b) {
-
-            if(a.first == b.first) {
-                return a.second < b.second;
-            }
-            return a.first < b.first;
-        });
+    sort(v.begin(), v.end());
 
     for(int i = 0; i < a; i++) {
         cout << v[i].first << ' ' <<  v[i].second << '\n';
