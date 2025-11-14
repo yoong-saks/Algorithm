@@ -1,30 +1,35 @@
+#include <sstream>
 #include <iostream>
-#include <vector>
+#include <string>
 
 using namespace std;
 
-int n;
-
 int main() {
+    int n;
+
     cin >> n;
 
     for(int i = 1; i <= n; ++i) {
-        int x = i;
-        bool flag = 0;
+        stringstream ss;
+        ss << i;
 
-        while(x) {
-            if(x % 10 != 0 && (x % 10) % 3 == 0) {
-                cout << '-';
-                flag = 1;
-            }
-            x /= 10;
+        char ch;
+        int cnt = 0;
+        string s;
+
+        while(ss >> ch) {
+            if(ch == '3' || ch == '6' || ch == '9') cnt++;
+            else s += ch;
         }
 
-        if(!flag) {
-            cout << i;
+        if(cnt) {
+            s.clear();
+            s.append(cnt, '-');
         }
 
-        cout << ' ';
+        cout << s << ' ';
     }
     cout << '\n';
+
+    return 0;
 }
