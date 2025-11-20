@@ -1,58 +1,60 @@
 #include <iostream>
-#include <string>
 #include <queue>
+#include <string>
 
 using namespace std;
 
-int di[4] = {-1, 0, 1, 0};
-int dj[4] = {0, 1, 0, -1};
-int m[101][101];
-
 struct IJT {
-    int i, j, t;
+	int i, j, t;
 };
 
+int board[101][101];
+
+int di[4] = { -1, 0, 1, 0 };
+int dj[4] = { 0, 1, 0, -1 };
+
 int main() {
-    int N, M;
+	int N, M;
 
-    cin >> N >> M;
+	cin >> N >> M;
 
-    for(int i = 0; i < N; ++i) {
-        string s;
+	for (int i = 1; i <= N; ++i) {
+		string s;
 
-        cin >> s;
-        for(int j = 0; j < M; ++j) {
-            m[i][j] = s[j] - '0';
-        }
-    }
+		cin >> s;
 
-    queue<IJT> q;
-    q.push({0, 0, 1});
-    m[0][0] = 0;
+		for (int j = 1; j <= M; ++j) {
 
-    while(!q.empty()) {
-        IJT cur = q.front();
-        q.pop();
+			board[i][j] = s[j - 1] - '0';
+		}
+	}
 
-        
+	queue<IJT> q;
 
-        for(int d = 0; d < 4; ++d) {
-            int ni, nj;
+	q.push({ 1, 1, 1 });
+	board[1][1] = 0;
 
-            ni = cur.i + di[d];
-            nj = cur.j + dj[d];
+	while (!q.empty()) {
+		IJT cur = q.front();
+		q.pop();
 
-            if(!(0 <= ni && ni < N)) continue;
-            if(!(0 <= nj && nj < M)) continue;
-            if(m[ni][nj] == 0) continue;
-            if(ni == N - 1 && nj == M - 1) {
-                cout << cur.t + 1 << endl;
+		for (int d = 0; d < 4; ++d) {
+			int ni = cur.i + di[d];
+			int nj = cur.j + dj[d];
 
-                return 0;
-            }
+			if (!(1 <= ni && ni <= N)) continue;
+			if (!(1 <= nj && nj <= M)) continue;
+			if (board[ni][nj] == 0) continue;
+			if (ni == N && nj == M) {
+				cout << cur.t + 1 << endl;
 
-            m[ni][nj] = 0;
-            q.push({ni, nj, cur.t + 1});
-        }
-    }
+				return 0;
+			}
+
+			board[ni][nj] = 0;
+			q.push({ ni, nj, cur.t + 1 });
+		}
+	}
+
+	return 0;
 }
