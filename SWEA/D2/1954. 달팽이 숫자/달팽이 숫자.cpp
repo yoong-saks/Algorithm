@@ -3,41 +3,12 @@
 
 using namespace std;
 
-// rdlu
-int dx[4] = {1, 0, -1, 0};
-int dy[4] = {0, 1, 0, -1};
+struct IJ {
+    int i, j;
+};
 
-void make_snail(int n) {
-    vector<vector<int>> board(n, vector<int>(n, 0));
-
-    int x = 0; 
-    int y = 0;
-    int dir = 0;
-
-    for(int i = 1; i <= n * n; ++i) {
-        board[y][x] = i;
-
-        int nx = x + dx[dir];
-        int ny = y + dy[dir];
-
-        if(nx < 0 || nx >= n || ny < 0 || ny >= n || board[ny][nx]) {
-            dir = (dir + 1) % 4;
-
-            nx = x + dx[dir];
-            ny = y + dy[dir];
-        }
-
-        x = nx;
-        y = ny;
-    }
-
-    for(int i = 0; i < n; ++i) {
-        for(int j = 0; j < n; ++j) {
-            cout << board[i][j] << ' ';
-        }
-        cout << '\n';
-    }
-}
+int di[4] = {0, 1, 0, -1};
+int dj[4] = {1, 0, -1, 0};
 
 int main() {
     int T;
@@ -45,11 +16,41 @@ int main() {
     cin >> T;
 
     for(int t = 1; t <= T; ++t) {
-        int n;
+        int N;
 
-        cin >> n;
+        cin >> N;
 
-        cout << '#' << t << '\n';
-        make_snail(n);
+        vector<vector<int>> v(N, vector<int>(N, 0));
+
+        int dir = 0;
+
+        IJ cur = {0, 0};
+        
+        for(int i = 1; i <= N * N; ++i) {
+            v[cur.i][cur.j] = i;
+
+            int ni = cur.i + di[dir];
+            int nj = cur.j + dj[dir];
+
+            if(!(0 <= ni && ni < N) || !(0 <= nj && nj < N) || v[ni][nj]) {
+                dir = (dir + 1) % 4;
+
+                ni = cur.i + di[dir];
+                nj = cur.j + dj[dir];
+            }
+
+            cur.i = ni;
+            cur.j = nj;
+        }
+
+        cout << '#' << t << endl;
+
+        for(int i = 0; i < N; ++i) {
+            for(int j = 0; j < N; ++j) {
+                cout << v[i][j] << ' ';
+            }
+            cout << endl;
+        }
     }
+
 }
