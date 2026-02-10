@@ -85,31 +85,32 @@ public class Solution {
 					visited[cur.y][cur.x] = true; 
 				}
 				
-//				Iterator<XYDE> iter = list.iterator();
-				for(int i = list.size() - 1; i >= 0; --i) {
-					XYDE cur = list.get(i);
+				Iterator<XYDE> iter = list.iterator();
+//				for(int i = list.size() - 1; i >= 0; --i) {
+//					XYDE cur = list.get(i);
+//					
+//					for(int j = 0; j < idx; ++j) {
+//						if(cur.equals(deleteList[j])) {
+//							ans += cur.e;
+//							list.remove(i);
+//							visited[cur.y][cur.x] = false; 
+//							break;
+//						}
+//					}
+//				}
+				
+				while(iter.hasNext()) {
+					XYDE cur = iter.next();
 					
-					for(int j = 0; j < idx; ++j) {
-						if(cur.equals(deleteList[j])) {
+					for(int i = 0; i < idx; ++i) {
+						if(cur.equals(deleteList[i])) {
 							ans += cur.e;
-							list.remove(i);
+							iter.remove();
 							visited[cur.y][cur.x] = false; 
 							break;
 						}
 					}
 				}
-				
-//				while(iter.hasNext()) {
-//					XYDE cur = iter.next();
-//					
-//					for(int i = 0; i < idx; ++i) {
-//						if(cur.equals(deleteList[i])) {
-//							ans += cur.e;
-//							iter.remove();
-//							break;
-//						}
-//					}
-//				}
 			}
 			
 			System.out.println("#" + t + " " + ans);
