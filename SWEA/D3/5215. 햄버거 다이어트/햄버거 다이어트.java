@@ -3,51 +3,44 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Solution {
-	
-	static int[][] ingreInfo;
-	
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int T = Integer.parseInt(br.readLine());
-		
-		for(int t = 1; t <= T; ++t) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			
-			int N = Integer.parseInt(st.nextToken()); // 재료의 수
-			int maxCal = Integer.parseInt(st.nextToken()); // 최대 칼로리
-			
-			ingreInfo = new int[N][2];
-			
-			for(int i = 0; i < N; ++i) {
-				st = new StringTokenizer(br.readLine());
-				
-				int score = Integer.parseInt(st.nextToken());
-				int calrories = Integer.parseInt(st.nextToken());
-				
-				ingreInfo[i][0] = score;
-				ingreInfo[i][1] = calrories;
+    // 햄버거 다이어트 (조합)
 
-			}
-			
-			int ans = 0;
-			
-			for(int i = 0; i < (1 << N); ++i) {// 경우의 수만큼 반복
-				int calSum = 0;
-				int scoSum = 0;
-				
-				for(int j = 0; j < N; ++j) {
-					if((i & (1 << j)) == (1 << j)) { // 현재 부분집합의 조합에 해당하는 버거 index
-						if(calSum + ingreInfo[j][1] > maxCal) break;
-						scoSum += ingreInfo[j][0];
-						calSum += ingreInfo[j][1];
-					}
-				}
-				ans = Math.max(ans, scoSum);
-			}
-			
-			System.out.println("#" + t + " " + ans);
-		}
-	}
+    private static int N, ans, L;
+    private static int[][] foodList;
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        int T = Integer.parseInt(br.readLine());
+
+        for(int t = 1; t <= T; ++t) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            N = Integer.parseInt(st.nextToken()); // 햄버거의 개수 1 <= N <= 20
+            L  = Integer.parseInt(st.nextToken()); // 제한 칼로리 1 <= L <= 10000
+
+            foodList = new int[N][2];
+
+            for(int i = 0; i < N; ++i) {
+                st = new StringTokenizer(br.readLine());
+                foodList[i][0] = Integer.parseInt(st.nextToken());
+                foodList[i][1] = Integer.parseInt(st.nextToken());
+            }
+
+            ans = 0;
+
+            dfs(0, 0, 0);
+
+            System.out.println("#" + t + " " + ans);
+        }
+    }
+
+    private static void dfs(int start, int calories, int score) {
+        if(L < calories) return;
+        
+        ans = Math.max(ans, score);
+
+        for(int i = start; i < N; ++i) {
+            dfs(i + 1, calories + foodList[i][1], score + foodList[i][0]);
+        }
+    }
 }
