@@ -85,16 +85,10 @@ public class Main {
 		
 		int connected = 0;
 		int ans = 0;
-		while(true) {
+		while(!pq.isEmpty()) {
 			if(connected == islandNum - 1) break;
 			
-			IJ cur = null;
-			
-			if(!pq.isEmpty()) {
-				cur = pq.poll();
-			} else {
-				break;
-			}
+			IJ cur = pq.poll();
 			
 			if(find(cur.i * -1) != find(cur.j * -1)) {
 				union(cur.i * -1, cur.j * -1);
