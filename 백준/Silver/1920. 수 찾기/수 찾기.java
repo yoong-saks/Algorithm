@@ -9,6 +9,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
 		int N = Integer.parseInt(br.readLine());
 		st = new StringTokenizer(br.readLine());
 
@@ -21,7 +22,9 @@ public class Main {
 		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < M; ++i) {
 			String s2 = st.nextToken();
-			System.out.println(hs.contains(Integer.parseInt(s2)) ? "1" : "0");
+			sb.append(hs.contains(Integer.parseInt(s2)) ? "1\n" : "0\n");
 		}
+		
+		System.out.println(sb);
 	}
 }
