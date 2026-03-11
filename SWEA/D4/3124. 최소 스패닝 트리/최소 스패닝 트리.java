@@ -1,63 +1,64 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Solution {
-	private static int[] ufm = new int[100_100];
-	
-	private static int find(int n) {
-		if(ufm[n] == n) return n;
-		else return ufm[n] = find(ufm[n]);
-	}
-	
-	private static void union(int n1, int n2) {
-		int p1 = find(n1);
-		int p2 = find(n2);
-		
-		if(p1 != p2) ufm[p1] = p2;
-	}
-	
+
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
 		
 		int T = Integer.parseInt(br.readLine());
 		
 		for(int t = 1; t <= T; ++t) {
 			st = new StringTokenizer(br.readLine());
-
+			
 			int V = Integer.parseInt(st.nextToken());
 			int E = Integer.parseInt(st.nextToken());
+			ArrayList<Node>[] adjList = new ArrayList[V];
+			
 			
 			for(int i = 0; i < V; ++i) {
-				ufm[i] = i;
+				adjList[i] = new ArrayList<>();
 			}
-			
-			PriorityQueue<SEW> pq = new PriorityQueue<>((a, b) -> a.weight - b.weight);
 			
 			for(int i = 0; i < E; ++i) {
 				st = new StringTokenizer(br.readLine());
 
-				int s = Integer.parseInt(st.nextToken()) - 1;
-				int e = Integer.parseInt(st.nextToken()) - 1;
-				int w = Integer.parseInt(st.nextToken());
+				int A = Integer.parseInt(st.nextToken()) - 1;
+				int B = Integer.parseInt(st.nextToken()) - 1;
+				int C = Integer.parseInt(st.nextToken());
 				
-				pq.offer(new SEW(s, e, w));
+				adjList[A].add(new Node(B, C));
+				adjList[B].add(new Node(A, C));
 			}
 			
-			int connected = 0;
 			long ans = 0;
-			while(true) {
-				if(connected == V - 1) break;
-				SEW cur = pq.poll();
+			int cnt = 0;
+			
+			PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.weight - b.weight);
+			
+			boolean[] visited = new boolean[V];
+			
+			pq.add(new Node(0, 0));
+			
+			while(!pq.isEmpty()) {
+				Node cur = pq.poll();
 				
-				if(find(cur.start) == find(cur.end)) continue;
+				if(visited[cur.end]) continue;
 				
-				union(cur.start, cur.end);
-				connected++;
-				ans += (long)cur.weight;
+				visited[cur.end] = true;
+				ans += cur.weight;
+				if(++cnt == V) break;
+				
+				for(Node next : adjList[cur.end]) {
+					if(!visited[next.end]) {
+						pq.add(next);
+					}
+				}
 			}
 			
 			sb.append("#").append(t).append(" ").append(ans).append("\n");
@@ -65,16 +66,13 @@ public class Solution {
 		System.out.println(sb);
 	}
 	
-	private static class SEW {
-		int start;
+	private static class Node {
 		int end;
 		int weight;
-		public SEW(int start, int end, int weight) {
+		public Node(int end, int weight) {
 			super();
-			this.start = start;
 			this.end = end;
 			this.weight = weight;
 		}
-		
 	}
 }
