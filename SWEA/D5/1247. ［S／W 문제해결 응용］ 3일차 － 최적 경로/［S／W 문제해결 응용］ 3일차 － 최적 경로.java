@@ -42,6 +42,8 @@ public class Solution {
 	}
 	
 	private static void findMinDistToGoHome(int prevPos, int distance, int cnt) {
+		if(distance > ans) return;
+		
 		if(cnt == N) {
 			distance += (Math.abs(end.i - customers[prevPos].i) + Math.abs(end.j - customers[prevPos].j));
 			
