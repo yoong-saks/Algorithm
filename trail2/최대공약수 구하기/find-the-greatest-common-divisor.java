@@ -12,12 +12,10 @@ public class Main {
     }
 
     public static int gcb(int a, int b) {
-        while(b != 0) {
-            int tmp = a % b;
-            a = b;
-            b = tmp;
+        if(b == 0) {
+            return a;
         }
 
-        return a;
+        return gcb(b, a % b);
     }
 }
